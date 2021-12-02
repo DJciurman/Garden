@@ -22,9 +22,6 @@ public class User {
   @Column(nullable = false, length = 20)
   private String lastName;
 
-  @Column(nullable = false, length = 20)
-  private String type;
-
   public Long getId() {
     return id;
   }
@@ -65,11 +62,4 @@ public class User {
     this.password = password;
   }
 
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
 }

@@ -28,7 +28,6 @@ public class UserRepositoryTests {
     user.setPassword("maroko");
     user.setFirstName("Korneliusz");
     user.setLastName("łuk");
-    user.setType("Administrator");
 
     User savedUser = repo.save(user);
 
