@@ -24,10 +24,11 @@ public class UserRepositoryTests {
   @Test
   public void testCreateUser() {
     User user = new User();
-    user.setEmail("kokkkoo@wp.pl");
+    user.setEmail("kasdasdkkoo@wp.pl");
     user.setPassword("maroko");
     user.setFirstName("Korneliusz");
     user.setLastName("łuk");
+    user.setType("Administrator");
 
     User savedUser = repo.save(user);
 

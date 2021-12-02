@@ -26,6 +26,7 @@ public class AppController {
 
   @PostMapping("/process_register")
   public String processRegistration(User user) {
+    user.setType("Administrator");
     repo.save(user);
 
     return "register_success";
