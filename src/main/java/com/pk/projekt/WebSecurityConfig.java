@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -46,19 +47,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-        .antMatchers("/list_users")
-        .authenticated()
-        .anyRequest()
-        .permitAll()
-        .and()
-        .formLogin()
-        .usernameParameter("email")
-        .defaultSuccessUrl("/list_users")
-        .permitAll()
-        .and()
-        .logout()
-        .logoutSuccessUrl("/")
-        .permitAll();
+//    http.authorizeRequests()
+//        .antMatchers("/list_users")
+//        .authenticated()
+//        .anyRequest()
+//        .permitAll()
+//        .and()
+//        .formLogin()
+//        .usernameParameter("email")
+//        .defaultSuccessUrl("/list_users")
+//        .permitAll()
+//        .and()
+//        .logout()
+//        .logoutSuccessUrl("/")
+//        .permitAll();
+    http.authorizeRequests().antMatchers("/LogIn").permitAll()
+            .antMatchers("/index", "/Moje-Ogrody", "/PanelOgrodnika", "/Pracownicy", "/Rośliny", "/Zadania").authenticated()
+            .and().formLogin().loginPage("/")
+            .and().logout().logoutSuccessUrl("/").permitAll();
   }
 }

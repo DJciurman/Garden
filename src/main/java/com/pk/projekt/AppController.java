@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.net.ConnectException;
+import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -26,10 +28,30 @@ public class AppController {
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     String encodedPassword = encoder.encode(user.getPassword());
     user.setPassword(encodedPassword);
-    repo.save(user);
+    try {
+      repo.save(user);
+    } catch (Exception e) {
+
+    }
     model.addAttribute("user", new User());
 
     return "LogIn";
+  }
+
+  @PostMapping("/login")
+  public String processLogin(User user, Model model) {
+    User userDatabse = repo.findByEmail(user.getEmail());
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    String encodedPassword = encoder.encode(user.getPassword());
+    user.setPassword(encodedPassword);
+    if (userDatabse.getPassword().equals(user.getPassword())) {
+
+    }
+    else {
+
+    }
+
+    return "index";
   }
 
   @GetMapping("/list_users")
