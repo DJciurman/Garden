@@ -16,25 +16,20 @@ public class AppController {
   private UserRepository repo;
 
   @GetMapping("")
-  public String viewHomePage() {
-    return "index";
-  }
-
-  @GetMapping("/register")
-  public String showSingUpForm(Model model) {
+  public String viewHomePage(Model model) {
     model.addAttribute("user", new User());
-
-    return "singup_user";
+    return "LogIn";
   }
 
-  @PostMapping("/process_register")
-  public String processRegistration(User user) {
+  @PostMapping("/register")
+  public String processRegistration(User user, Model model) {
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     String encodedPassword = encoder.encode(user.getPassword());
     user.setPassword(encodedPassword);
     repo.save(user);
+    model.addAttribute("user", new User());
 
-    return "register_success";
+    return "LogIn";
   }
 
   @GetMapping("/list_users")
