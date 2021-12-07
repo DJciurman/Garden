@@ -27,6 +27,9 @@ public class Garden {
   @OneToMany(mappedBy = "garden", targetEntity = Task.class)
   private Set<Task> task;
 
+  @OneToMany(mappedBy = "garden", targetEntity = Note.class)
+  private Set<Note> note;
+
 
 
 }

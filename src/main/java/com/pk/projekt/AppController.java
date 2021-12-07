@@ -1,6 +1,9 @@
 package com.pk.projekt;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,12 +23,28 @@ public class AppController {
 
   @GetMapping("")
   public String viewHomePage(Model model) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (!(authentication instanceof AnonymousAuthenticationToken)) {
+      return "index";
+    }
     model.addAttribute("user", new User());
+    return "login";
+  }
+
+  @GetMapping("/register")
+  public String processRegistration() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (!(authentication instanceof AnonymousAuthenticationToken)) {
+      return "index";
+    }
     return "login";
   }
 
   @PostMapping("/register")
   public String processRegistration(User user, Model model) {
+
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     String encodedPassword = encoder.encode(user.getPassword());
     user.setPassword(encodedPassword);
@@ -42,6 +61,13 @@ public class AppController {
   @GetMapping("/login")
   public String processLogin(Model model) {
     model.addAttribute("user", new User());
+
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (!(authentication instanceof AnonymousAuthenticationToken)) {
+      return "index";
+    }
+
     return "login";
   }
 
@@ -73,14 +99,6 @@ public class AppController {
   public String viewGardensPage()
   {
     return "Moje-Ogrody";
-  }
-
-  @GetMapping("/list_users")
-  public String viewUsersList(Model model) {
-    List<User> listUsers = repo.findAll();
-    model.addAttribute("listUsers", listUsers);
-
-    return "users";
   }
 
 }

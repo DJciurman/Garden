@@ -32,4 +32,7 @@ public class User {
   @OneToMany(mappedBy = "user", targetEntity = Task.class)
   private Set<Task> task;
 
+  @OneToMany(mappedBy = "user", targetEntity = Note.class)
+  private Set<Note> note;
+
 }

@@ -3,6 +3,7 @@ package com.pk.projekt;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -17,4 +18,7 @@ public class Plant {
 
   @Column(length = 256)
   private String description;
+
+  @OneToMany(mappedBy = "plant", targetEntity = Note.class)
+  private Set<Note> note;
 }
