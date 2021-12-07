@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        .logoutSuccessUrl("/")
 //        .permitAll();
     http.authorizeRequests().antMatchers("/LogIn").permitAll()
-            .antMatchers("/index", "/Moje-Ogrody", "/PanelOgrodnika", "/Pracownicy", "/Rośliny", "/Zadania").authenticated()
+            .antMatchers("/index", "/garden", "/employee", "/plant", "/task").authenticated()
             .and().formLogin().loginPage("/")
             .and().logout().logoutSuccessUrl("/").permitAll();
   }

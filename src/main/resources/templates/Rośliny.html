@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;">
+<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -40,10 +40,10 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-custom-font u-font-lobster u-nav u-unstyled"><li class="u-nav-item"><a class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color" href="Moje-Ogrody.html" style="padding: 50px 108px;">Moje Ogrody</a>
-</li><li class="u-nav-item"><a class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color" href="Rośliny.html" style="padding: 50px 108px;">Rośliny</a>
-</li><li class="u-nav-item"><a class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color" href="Zadania.html" style="padding: 50px 108px;">Zadania</a>
-</li><li class="u-nav-item"><a class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color" href="Pracownicy.html" style="padding: 50px 108px;">Pracownicy</a>
+            <ul class="u-custom-font u-font-lobster u-nav u-unstyled"><li class="u-nav-item"><a class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color" th:href="@{/garden}" style="padding: 50px 108px;">Moje Ogrody</a>
+</li><li class="u-nav-item"><a class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color" th:href="@{/plant}" style="padding: 50px 108px;">Rośliny</a>
+</li><li class="u-nav-item"><a class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color" th:href="@{/task}" style="padding: 50px 108px;">Zadania</a>
+</li><li class="u-nav-item"><a class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color" th:href="@{/employee}" style="padding: 50px 108px;">Pracownicy</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
