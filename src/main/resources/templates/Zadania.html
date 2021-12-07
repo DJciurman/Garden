@@ -67,7 +67,12 @@
     
     
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-55c8"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">:)<br>
+        <p class="u-small-text u-text u-text-variant u-text-1"><form th:action="@{/logout}" method="post">
+        <p>
+            Witaj <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+        </p>
+        <button type="submit" class="u-btn u-btn-submit u-button-style btn btn-primary">Wyloguj</button>
+    </form><br>
         </p>
       </div></footer>
   </body>

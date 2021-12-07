@@ -42,18 +42,6 @@ public class AppController {
   @GetMapping("/login")
   public String processLogin(Model model) {
     model.addAttribute("user", new User());
-//    User userDatabse = repo.findByEmail(user.getEmail());
-//    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//    String encodedPassword = encoder.encode(user.getPassword());
-//    user.setPassword(encodedPassword);
-//    if (userDatabse.getPassword().equals(user.getPassword())) {
-//
-//    }
-//    else {
-//
-//    }
-//
-//    return "index";
     return "login";
   }
 
