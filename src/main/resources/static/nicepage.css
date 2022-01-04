@@ -34920,11 +34920,15 @@ a.u-link.u-text-hover-grey-90:hover {
         }
         h2:not(.u-subtitle)
         {
-        font-weight: 400;
-        font-size: 2.25rem;
+        font-size: 3rem;
         line-height: 1.1;
         margin-top: 20px;
         margin-bottom: 20px;
+        font-style: italic;
+        list-icon-spacing: 0.3;
+        list-icon-size: 0.8;
+        font-family: Lobster,display;
+        font-weight: 700;
         }
         h3
         {
@@ -35091,6 +35095,13 @@ a.u-link.u-text-hover-grey-90:hover {
         /** cms-rules **/
 
         /** color-rules **/
+        .u-overlap.u-overlap-transparent:not(.u-overlap-contrast) .u-header :not(.u-nav-item) > h2:not(.u-subtitle),
+        .u-gradient > .u-container-layout > h2:not(.u-subtitle),
+        .u-image:not(.u-shading) > .u-container-layout > h2:not(.u-subtitle),
+        h2:not(.u-subtitle)
+        {
+        color: #ffffff;
+        }
         .u-overlap.u-overlap-transparent:not(.u-overlap-contrast) .u-header :not(.u-nav-item) > a,
         .u-gradient > .u-container-layout > a,
         .u-image:not(.u-shading) > .u-container-layout > a,
@@ -35147,6 +35158,10 @@ a.u-link.u-text-hover-grey-90:hover {
         /** color-rules **/
 
         /** alt-color-rules **/
+        .u-shading h2:not(.u-subtitle),.u-overlap-contrast .u-header h2:not(.u-subtitle):not(.u-nav-link):not(.u-btn)
+        {
+        color: #b3b3b3;
+        }
         .u-shading a,.u-overlap-contrast .u-header a:not(.u-nav-link):not(.u-btn)
         {
         color: #57614c;
@@ -35157,7 +35172,7 @@ a.u-link.u-text-hover-grey-90:hover {
 
 /*end-variables sitestylecss*/
 .u-header .u-sheet-1 {
-  min-height: 230px;
+  min-height: 217px;
 }
 
 .u-header .u-text-1 {
@@ -35167,21 +35182,49 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-text-2 {
   text-align: left;
-  font-size: 3rem;
-  font-weight: 700;
-  font-style: italic;
   text-shadow: 0 2px 8px rgba(128,128,128,1);
-  margin: 0 auto;
+  margin: -16px auto 0;
+}
+
+.u-header .u-btn-1 {
+  border-style: solid;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  font-weight: 700;
+  margin: -36px 0 0 auto;
+}
+
+.u-header .u-btn-2 {
+  border-style: solid;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  font-weight: 700;
+  margin: -48px auto 0 1px;
 }
 
 .u-header .u-menu-1 {
-  margin: 37px 0 0;
+  margin: 27px 0 19px;
 }
 
 .u-header .u-nav-2 {
   font-size: 1.25rem;
 }
+@media (max-width: 1199px) {
+  .u-header .u-text-2 {
+    font-size: 3rem;
+    font-weight: bold;
+    font-style: italic;
+  }
 
+  .u-header .u-btn-1 {
+    margin-top: -36px;
+  }
+
+  .u-header .u-btn-2 {
+    margin-top: -48px;
+    margin-left: 0;
+  }
+}
 
 
 @media (max-width: 575px) {

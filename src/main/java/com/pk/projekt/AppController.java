@@ -1,6 +1,7 @@
 package com.pk.projekt;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.GenericApplicationContextExtensionsKt;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,33 +12,38 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.net.ConnectException;
-import java.sql.SQLException;
 import java.util.List;
 
 @Controller
 public class AppController {
 
-  @Autowired
-  private UserRepository repo;
+  @Autowired private UserRepository userRepo;
+
+  @Autowired private GardenRepository gardenRepo;
 
   @GetMapping("")
   public String viewHomePage(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     if (!(authentication instanceof AnonymousAuthenticationToken)) {
-      return "index";
+      String email = SecurityContextHolder.getContext().getAuthentication().getName();
+      User user = userRepo.findByEmail(email);
+      model.addAttribute("user", user);
+      return "ManageAccount";
     }
     model.addAttribute("user", new User());
     return "login";
   }
 
   @GetMapping("/register")
-  public String processRegistration() {
+  public String processRegistration(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     if (!(authentication instanceof AnonymousAuthenticationToken)) {
-      return "index";
+      String email = SecurityContextHolder.getContext().getAuthentication().getName();
+      User user = userRepo.findByEmail(email);
+      model.addAttribute("user", user);
+      return "ManageAccount";
     }
     return "login";
   }
@@ -49,7 +55,7 @@ public class AppController {
     String encodedPassword = encoder.encode(user.getPassword());
     user.setPassword(encodedPassword);
     try {
-      repo.save(user);
+      userRepo.save(user);
     } catch (Exception e) {
 
     }
@@ -65,40 +71,78 @@ public class AppController {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     if (!(authentication instanceof AnonymousAuthenticationToken)) {
-      return "index";
+      String email = SecurityContextHolder.getContext().getAuthentication().getName();
+      User user = userRepo.findByEmail(email);
+      model.addAttribute("user", user);
+      return "ManageAccount";
     }
 
     return "login";
   }
 
   @GetMapping("/index")
-  public String viewUserPage()
-  {
-    return "index";
+  public String viewUserPage(Model model) {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    model.addAttribute("user", user);
+    return "ManageAccount";
   }
 
   @RequestMapping("/plant")
-  public String viewPlantsPage()
-  {
-    return "Rośliny";
+  public String viewMyPlantsPage() {
+    return "MyPlants";
   }
 
   @RequestMapping("/task")
-  public String viewTasksPage()
-  {
-    return "Zadania";
+  public String viewTasksPage() {
+    return "Tasks";
   }
 
   @RequestMapping("/employee")
-  public String viewEmployeesPage()
-  {
-    return "Pracownicy";
+  public String viewWorkersPage() {
+    return "Workers";
   }
 
   @RequestMapping("/garden")
-  public String viewGardensPage()
-  {
-    return "Moje-Ogrody";
+  public String viewMyGardensPage(Model model) {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    List<Garden> listGarden = gardenRepo.findByUserId(user);
+    model.addAttribute("listGarden", listGarden);
+    return "MyGardens";
   }
 
+  @RequestMapping("/addNote")
+  public String viewAddNotePage(Model model) {
+    return "AddNote";
+  }
+
+  @GetMapping("/addGarden")
+  public String viewAddGardenPage(Model model) {
+    model.addAttribute("garden", new Garden());
+    return "AddGarden";
+  }
+
+  @PostMapping("/addGarden")
+  public String processAddGarden (Garden garden, Model model) {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    garden.setUser(user);
+    garden.setNote(null);
+    try {
+      gardenRepo.save(garden);
+    } catch (Exception e) {
+
+    }
+    model.addAttribute("garden", new Garden());
+    return "AddGarden";
+  }
+
+  @RequestMapping("/account")
+  public String viewManageAccountPage(Model model) {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    model.addAttribute("user", user);
+    return "ManageAccount";
+  }
 }

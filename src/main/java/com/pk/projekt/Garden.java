@@ -4,6 +4,7 @@ package com.pk.projekt;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -30,6 +31,7 @@ public class Garden {
   @OneToMany(mappedBy = "garden", targetEntity = Note.class)
   private Set<Note> note;
 
-
+  @ManyToMany(mappedBy = "garden", fetch = FetchType.LAZY, targetEntity = Plant.class)
+  private Set<Plant> plant = new HashSet<>();
 
 }
