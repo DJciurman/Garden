@@ -128,7 +128,6 @@ public class AppController {
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     User user = userRepo.findByEmail(email);
     garden.setUser(user);
-    garden.setNote(null);
     try {
       gardenRepo.save(garden);
     } catch (Exception e) {

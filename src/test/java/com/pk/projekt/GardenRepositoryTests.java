@@ -10,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.Arrays;
+
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Rollback(false)
@@ -20,6 +22,9 @@ public class GardenRepositoryTests {
 
   @Autowired
   private UserRepository repoUser;
+
+  @Autowired
+  private PlantRepository repoPlant;
 
   @Autowired
   private TestEntityManager entityManager;
@@ -38,6 +43,28 @@ public class GardenRepositoryTests {
     Garden existGarden = entityManager.find(Garden.class, savedGarden.getId());
 
     assertThat(existGarden.getId()).isEqualTo(garden.getId());
+  }
+
+  @Test
+  public void testAddPlant() {
+    Garden garden = repo.findByGardenId(Long.valueOf(1));
+
+    Plant plant1 = repoPlant.findByPlantId(Long.valueOf(1));
+    Plant plant2 = repoPlant.findByPlantId(Long.valueOf(2));
+    Plant plant3 = repoPlant.findByPlantId(Long.valueOf(3));
+
+    garden.getPlant().addAll(Arrays.asList(plant1, plant2, plant3));
+
+    repo.save(garden);
+  }
+
+  @Test
+  public void testAddDescription() {
+    Garden garden = repo.findByGardenId(Long.valueOf(1));
+
+    garden.setDescription("Ładny ogród");
+
+    repo.save(garden);
   }
 
 

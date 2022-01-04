@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "plant")
 public class Plant {
@@ -30,4 +29,36 @@ public class Plant {
           inverseJoinColumns = {
           @JoinColumn(name = "garden_id", referencedColumnName = "id", nullable = false, updatable = false)})
   private Set<Garden> garden = new HashSet<>();
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Set<Note> getNote() {
+    return note;
+  }
+
+  public Set<Garden> getGarden() {
+    return garden;
+  }
 }

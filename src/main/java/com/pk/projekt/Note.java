@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
 @Entity
 @Table(name = "note")
 public class Note {
@@ -27,4 +26,43 @@ public class Note {
   @JoinColumn(name = "plantId")
   private Plant plant;
 
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Garden getGarden() {
+    return garden;
+  }
+
+  public void setGarden(Garden garden) {
+    this.garden = garden;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Plant getPlant() {
+    return plant;
+  }
+
+  public void setPlant(Plant plant) {
+    this.plant = plant;
+  }
 }

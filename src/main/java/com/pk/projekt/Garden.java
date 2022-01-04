@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "garden")
 public class Garden {
@@ -21,6 +20,9 @@ public class Garden {
   @Column(nullable = false, length = 40)
   private String address;
 
+  @Column(nullable = true, length = 64)
+  private String description;
+
   @ManyToOne
   @JoinColumn(name = "userId", nullable = false)
   private User user;
@@ -33,5 +35,57 @@ public class Garden {
 
   @ManyToMany(mappedBy = "garden", fetch = FetchType.LAZY, targetEntity = Plant.class)
   private Set<Plant> plant = new HashSet<>();
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Set<Task> getTask() {
+    return task;
+  }
+
+  public Set<Note> getNote() {
+    return note;
+  }
+
+  public Set<Plant> getPlant() {
+    return plant;
+  }
 
 }
