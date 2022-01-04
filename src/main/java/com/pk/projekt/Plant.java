@@ -22,12 +22,7 @@ public class Plant {
   @OneToMany(mappedBy = "plant", targetEntity = Note.class)
   private Set<Note> note;
 
-  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-  @JoinTable(name = "plant_garden",
-          joinColumns = {
-          @JoinColumn(name = "plant_id", referencedColumnName = "id", nullable = false, updatable = false)},
-          inverseJoinColumns = {
-          @JoinColumn(name = "garden_id", referencedColumnName = "id", nullable = false, updatable = false)})
+  @ManyToMany(mappedBy = "plant", fetch = FetchType.LAZY, targetEntity = Garden.class)
   private Set<Garden> garden = new HashSet<>();
 
   public Long getId() {

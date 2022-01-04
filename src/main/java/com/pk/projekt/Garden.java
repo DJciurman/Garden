@@ -33,8 +33,14 @@ public class Garden {
   @OneToMany(mappedBy = "garden", targetEntity = Note.class)
   private Set<Note> note;
 
-  @ManyToMany(mappedBy = "garden", fetch = FetchType.LAZY, targetEntity = Plant.class)
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+  @JoinTable(name = "plant_garden",
+          joinColumns = {
+                  @JoinColumn(name = "garden_id", referencedColumnName = "id", nullable = false, updatable = false)},
+          inverseJoinColumns = {
+                  @JoinColumn(name = "plant_id", referencedColumnName = "id", nullable = false, updatable = false)})
   private Set<Plant> plant = new HashSet<>();
+
 
   public Long getId() {
     return id;
