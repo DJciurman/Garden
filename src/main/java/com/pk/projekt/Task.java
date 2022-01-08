@@ -22,4 +22,5 @@ public class Task {
 
   @Column(nullable = false, length = 64)
   private String description;
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="font-size: 16px;">
+<html style="font-size: 16px;" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -33,9 +33,13 @@
             <a href="/"></a>
         </h3>
         <h2 class="u-text u-text-default u-text-2">WITAJCIE, OGRODNICY</h2>
-        <a href="LogIn.html" data-page-id="46173522"
-           class="u-border-2 u-border-white u-btn u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-1">wyloguj</a>
-        <a href="ManageAccount.html" data-page-id="105602464"
+        <form id="logout" th:action="@{/logout}" method="post">
+            <a onclick="document.getElementById('logout').submit();"
+               class="u-border-2 u-border-white u-btn u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-1">
+                wyloguj
+            </a>
+        </form>
+        <a th:href="@{/account}" data-page-id="105602464"
            class="u-border-2 u-border-white u-btn u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-2">zarządzaj
             kontem</a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
@@ -60,19 +64,19 @@
                 <ul class="u-custom-font u-font-lobster u-nav u-unstyled">
                     <li class="u-nav-item"><a
                             class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color"
-                            href="MyGardens.html" style="padding: 40px 108px;">Moje Ogrody</a>
+                            th:href="@{/garden}" style="padding: 40px 108px;">Moje Ogrody</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color"
-                            href="MyPlants.html" style="padding: 40px 108px;">Rośliny</a>
+                            th:href="@{/plant}" style="padding: 40px 108px;">Rośliny</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color"
-                            href="Tasks.html" style="padding: 40px 108px;">Zadania</a>
+                            th:href="@{/task}" style="padding: 40px 108px;">Zadania</a>
                     </li>
                     <li class="u-nav-item"><a
                             class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color"
-                            href="Workers.html" style="padding: 40px 113px 40px 108px;">Pracownicy</a>
+                            th:href="@{/employee}" style="padding: 40px 113px 40px 108px;">Pracownicy</a>
                     </li>
                 </ul>
             </div>

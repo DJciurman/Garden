@@ -48,24 +48,32 @@ public class GardenRepositoryTests {
 
   @Test
   public void testAddPlant() {
-    Garden garden = repo.findByGardenId(Long.valueOf(1));
+    Garden garden = repo.findByGardenId(1L);
 
-    Plant plant1 = repoPlant.findByPlantId(Long.valueOf(1));
-    Plant plant2 = repoPlant.findByPlantId(Long.valueOf(2));
-    Plant plant3 = repoPlant.findByPlantId(Long.valueOf(3));
+    Plant plant1 = repoPlant.findByPlantId(4L);
+//    Plant plant2 = repoPlant.findByPlantId(Long.valueOf(2));
+//    Plant plant3 = repoPlant.findByPlantId(Long.valueOf(3));
 
-    garden.getPlant().addAll(Arrays.asList(plant1, plant2, plant3));
+//    garden.getPlant().addAll(Arrays.asList(plant1, plant2, plant3));
+    garden.getPlant().add(plant1);
 
     repo.save(garden);
   }
 
   @Test
   public void testAddDescription() {
-    Garden garden = repo.findByGardenId(Long.valueOf(1));
+    Garden garden = repo.findByGardenId(1L);
 
     garden.setDescription("Ładny ogród");
 
     repo.save(garden);
+  }
+
+  @Test
+  public void testDeleteGarden() {
+    Garden garden = repo.findByGardenId(10L);
+
+    repo.delete(garden);
   }
 
 
