@@ -121,22 +121,30 @@
 <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-55c8">
     <div class="u-clearfix u-sheet u-sheet-1">
         <p>
-        <table class="table table-stripped table-bordered">
+        <form th:action="@{/deleteGarden}" method="POST">
+        <table class="table table-stripped table-bordered" align="center">
             <thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Nazwa</th>
                 <th>Adres</th>
+                <th>Usuń</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="garden: ${listGarden}">
+            <tr th:each="garden: ${listGarden}" style="background-color: orange; color: black">
                 <td th:text="${garden.id}">Id</td>
                 <td th:text="${garden.name}">Nazwa</td>
                 <td th:text="${garden.address}">Adres</td>
+                <td><button type="submit" th:value="${garden.id}" th:name="gardenId" style="color: black">
+                    X
+                </button>
+                </td>
             </tr>
             </tbody>
         </table>
+
+        </form>
         </p>
     </div>
 </footer>

@@ -129,15 +129,38 @@ public class AppController {
     return "MyGardens";
   }
 
-  @RequestMapping("/addNote")
+  @GetMapping("/addNote")
   public String viewAddNotePage(Model model) {
     return "AddNote";
   }
+
+  @PostMapping("/addNote")
+  public String processAddNote(@RequestParam("note") String description, @RequestParam("garden") Long gardenId, @RequestParam("worker") Long userId, @RequestParam("plant") Long plantId)
+  {
+    return "";
+  }
+
+
+
 
   @GetMapping("/addGarden")
   public String viewAddGardenPage(Model model) {
     model.addAttribute("garden", new Garden());
     return "AddGarden";
+  }
+
+  @PostMapping("/deleteGarden")
+  public String processDeleteGarden(@RequestParam("gardenId") Long gardenId, Model model)
+  {
+    Garden garden = gardenRepo.findByGardenId(gardenId);
+
+    gardenRepo.delete(garden);
+
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    List<Garden> listGarden = gardenRepo.findByUserId(user);
+    model.addAttribute("listGarden", listGarden);
+    return "MyGardens";
   }
 
   @PostMapping("/addGarden")
@@ -170,6 +193,31 @@ public class AppController {
     List<User> users = userRepo.findAll(Sort.by(Sort.Direction.ASC, "email"));
     model.addAttribute("listUser", users);
     return "AddTask";
+  }
+
+  @PostMapping("deleteTask")
+  public String processDeleteTask(@RequestParam("taskId") Long taskId, Model model)
+  {
+    Task task = taskRepo.findByTaskId(taskId);
+
+    taskRepo.delete(task);
+
+
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    List<Task> myTasks = taskRepo.findByUserIdGardenASC(user);
+    model.addAttribute("myTasks", myTasks);
+    List<Task> tasks = taskRepo.findAll(Sort.by(Sort.Direction.ASC, "garden"));
+    for (int i = 0; i < tasks.size(); i++)
+    {
+      if (tasks.get(i).getUser().equals(user))
+      {
+        tasks.remove(i);
+        i--;
+      }
+    }
+    model.addAttribute("tasksInMyGardens", tasks);
+    return "Tasks";
   }
 
   @PostMapping("/addTask")

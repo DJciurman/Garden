@@ -19,7 +19,7 @@ public class Plant {
   @Column(length = 256)
   private String description;
 
-  @OneToMany(mappedBy = "plant", targetEntity = Note.class)
+  @OneToMany(mappedBy = "plant", targetEntity = Note.class, cascade = CascadeType.ALL)
   private Set<Note> note;
 
   @ManyToMany(mappedBy = "plant", fetch = FetchType.LAZY, targetEntity = Garden.class)

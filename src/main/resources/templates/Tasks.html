@@ -121,30 +121,41 @@
 <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-55c8">
     <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">
-        <table class="table table-stripped table-bordered">
+        <form th:action="@{/deleteTask}" method="POST">
+        <table class="table table-stripped table-bordered" align="center">
             <thead class="thead-dark">
             <tr>
                 <th>Pracownik</th>
                 <th>Zadanie</th>
                 <th>Nazwa ogrodu</th>
                 <th>Adres ogrodu</th>
+                <th>Usuń</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="task: ${myTasks}">
+            <tr th:each="task: ${myTasks}" style="background-color: orange; color: black">
                 <td th:text="${task.user.email}">Pracownik</td>
                 <td th:text="${task.description}">Zadanie</td>
                 <td th:text="${task.garden.name}">Nazwa ogrodu</td>
                 <td th:text="${task.garden.address}">Adres ogrodu</td>
+                <td><button type="submit" th:value="${task.id}" th:name="taskId" style="color: black">
+                    X
+                </button>
+                </td>
             </tr>
-            <tr th:each="task: ${tasksInMyGardens}">
+            <tr th:each="task: ${tasksInMyGardens}" style="background-color: black">
                 <td th:text="${task.user.email}">Pracownik</td>
                 <td th:text="${task.description}">Zadanie</td>
                 <td th:text="${task.garden.name}">Nazwa ogrodu</td>
                 <td th:text="${task.garden.address}">Adres ogrodu</td>
+                <td><button type="submit" th:value="${task.id}" th:name="taskId" style="color: black">
+                    X
+                </button>
+                </td>
             </tr>
             </tbody>
         </table>
+    </form>
         </p>
     </div>
 </footer>

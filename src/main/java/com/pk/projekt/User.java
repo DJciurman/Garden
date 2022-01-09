@@ -25,13 +25,13 @@ public class User {
   @Column(nullable = false, length = 20)
   private String lastName;
 
-  @OneToMany(mappedBy = "user", targetEntity = Garden.class)
+  @OneToMany(mappedBy = "user", targetEntity = Garden.class, cascade = CascadeType.ALL)
   private Set<Garden> garden;
 
-  @OneToMany(mappedBy = "user", targetEntity = Task.class)
+  @OneToMany(mappedBy = "user", targetEntity = Task.class, cascade = CascadeType.ALL)
   private Set<Task> task;
 
-  @OneToMany(mappedBy = "user", targetEntity = Note.class)
+  @OneToMany(mappedBy = "user", targetEntity = Note.class, cascade = CascadeType.ALL)
   private Set<Note> note;
 
   public Long getId() {

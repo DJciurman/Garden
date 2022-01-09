@@ -27,10 +27,10 @@ public class Garden {
   @JoinColumn(name = "userId", nullable = false)
   private User user;
 
-  @OneToMany(mappedBy = "garden", targetEntity = Task.class)
+  @OneToMany(mappedBy = "garden", targetEntity = Task.class, cascade = CascadeType.ALL)
   private Set<Task> task;
 
-  @OneToMany(mappedBy = "garden", targetEntity = Note.class)
+  @OneToMany(mappedBy = "garden", targetEntity = Note.class, cascade = CascadeType.ALL)
   private Set<Note> note;
 
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
