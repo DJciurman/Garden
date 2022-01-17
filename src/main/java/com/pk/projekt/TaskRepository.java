@@ -20,5 +20,9 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
   @Query("SELECT t FROM Task t WHERE t.id = ?1")
   Task findByTaskId(Long id);
 
+  @Query("SELECT t FROM Task t WHERE t.garden in ?1 ORDER BY t.user.email ASC")
+  List<Task> finByGardenListASC(List<Garden> gardens);
+
+
 
 }

@@ -32,7 +32,9 @@
         <h3 class="u-headline u-text u-text-1">
             <a href="/"></a>
         </h3>
-        <h2 class="u-text u-text-default u-text-2">WITAJCIE, OGRODNICY</h2>
+        <h2 class="u-custom-font u-font-lobster u-text u-text-custom-color-1 u-text-default u-text-2"
+            data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
+            WITAJCIE, OGRODNICY</h2>
         <form id="logout" th:action="@{/logout}" method="post">
             <a onclick="document.getElementById('logout').submit();"
                class="u-border-2 u-border-white u-btn u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-1">
@@ -44,7 +46,7 @@
             kontem</a>
         <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
             <div class="menu-collapse u-custom-font u-font-lobster">
-                <a class="u-button-style u-custom-active-color u-custom-hover-color u-custom-text-active-color u-custom-text-color u-nav-link"
+                <a class="u-button-style u-custom-active-color u-custom-color u-custom-hover-color u-custom-text-active-color u-custom-text-color u-nav-link"
                    href="#">
                     <svg>
                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use>
@@ -63,20 +65,20 @@
             <div class="u-custom-menu u-nav-container">
                 <ul class="u-custom-font u-font-lobster u-nav u-unstyled">
                     <li class="u-nav-item"><a
-                            class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color"
-                            th:href="@{/garden}" style="padding: 40px 108px;">Moje Ogrody</a>
+                            class="u-active-black u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-custom-color-1 u-text-custom-color-1"
+                            th:href="@{/garden}" style="padding: 40px 112px;">Moje Ogrody</a>
                     </li>
                     <li class="u-nav-item"><a
-                            class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color"
-                            th:href="@{/plant}" style="padding: 40px 108px;">Rośliny</a>
+                            class="u-active-black u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-custom-color-1 u-text-custom-color-1"
+                            th:href="@{/plant}" style="padding: 40px 112px;">Rośliny</a>
                     </li>
                     <li class="u-nav-item"><a
-                            class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color"
-                            th:href="@{/task}" style="padding: 40px 108px;">Zadania</a>
+                            class="u-active-black u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-custom-color-1 u-text-custom-color-1"
+                            th:href="@{/task}" style="padding: 40px 112px;">Zadania</a>
                     </li>
                     <li class="u-nav-item"><a
-                            class="u-active-white u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-black u-text-body-alt-color"
-                            th:href="@{/employee}" style="padding: 40px 113px 40px 108px;">Pracownicy</a>
+                            class="u-active-black u-border-2 u-border-white u-button-style u-hover-black u-nav-link u-text-active-custom-color-1 u-text-custom-color-1"
+                            th:href="@{/employee}" style="padding: 40px 112px;">Notatki</a>
                     </li>
                 </ul>
             </div>
@@ -85,17 +87,17 @@
                     <div class="u-inner-container-layout u-sidenav-overflow">
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="MyGardens.html"
-                                                      style="padding: 40px 108px;">Moje Ogrody</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Moje-Ogrody.html"
+                                                      style="padding: 40px 112px;">Moje Ogrody</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="MyPlants.html"
-                                                      style="padding: 40px 108px;">Rośliny</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Plants.html"
+                                                      style="padding: 40px 112px;">Rośliny</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Tasks.html"
-                                                      style="padding: 40px 108px;">Zadania</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="tasks.html"
+                                                      style="padding: 40px 112px;">Zadania</a>
                             </li>
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Workers.html"
-                                                      style="padding: 40px 108px;">Pracownicy</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Notatki.html"
+                                                      style="padding: 40px 112px;">Notatki</a>
                             </li>
                         </ul>
                     </div>
@@ -109,54 +111,54 @@
     <div class="u-align-left u-clearfix u-sheet u-sheet-1">
         <div class="u-border-3 u-border-palette-1-base u-container-style u-expanded-width u-group u-group-1">
             <div class="u-container-layout u-container-layout-1">
-                <h2 class="u-custom-font u-font-lobster u-text u-text-body-alt-color u-text-default u-text-1">Dodaj
+                <h2 class="u-custom-font u-font-lobster u-text u-text-custom-color-1 u-text-default u-text-1">Dodaj​&nbsp;
                     Ogród</h2>
                 <div class="u-form u-form-1">
-                    <form th:action="@{/addGarden}" method="POST" onload="this.reset()"
-                          class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
-                          n source="custom" name="form" style="padding: 10px;" th:object="${garden}">
+                    <form th:action="@{/addGarden}" id="add" method="POST" onload="this.reset()" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
+                          source="custom" name="form" style="padding: 10px;" th:object="${garden}">
                         <div class="u-form-group u-form-group-1">
-                            <!--                            <label for="text-ed91" class="u-form-control-hidden u-label"></label>-->
+                            <label for="text-ed91" class="u-form-control-hidden u-label"></label>
                             <input type="text" id="text-ed91" name="garden" th:field="*{name}"
                                    class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-                                   required maxlength="20" minlength="1">
+                                   required maxlength="20">
                         </div>
                         <div class="u-form-group u-form-name">
-                            <!--                            <label for="name-7b5e" class="u-form-control-hidden u-label"></label>-->
+                            <label for="name-7b5e" class="u-form-control-hidden u-label"></label>
                             <input type="text" id="name-7b5e" name="adress" th:field="*{address}"
                                    class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required
-                                   maxlength="40" minlength="1">
+                                   maxlength="40">
                         </div>
                         <div class="u-form-group u-form-group-3">
                             <label for="text-9129" class="u-form-control-hidden u-label"></label>
                             <input type="text" id="text-9129" name="owner"
                                    class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
-                                   disabled value="Aktualny użytkownik">
+                                   disabled th:value="${owner.email} + ' : ' + ${owner.firstName} + ' ' + ${owner.lastName}">
                         </div>
                         <div class="u-form-group u-form-message">
-                            <!--                            <label for="email-7b5e" class="u-form-control-hidden u-label"></label>-->
+                            <label for="email-7b5e" class="u-form-control-hidden u-label"></label>
                             <textarea id="email-7b5e" name="description"
                                       class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white"
                                       maxlength="64"></textarea>
                         </div>
                         <div class="u-align-left u-form-group u-form-submit">
-                            <button type="submit" class="u-btn u-btn-submit u-button-style btn btn-primary">
-                                Zarejestruj
-                            </button>
-                            <!--                            <input type="submit" value="submit" class="u-form-control-hidden">-->
+                            <a
+                               class="u-border-2 u-border-white u-btn u-btn-submit u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-custom-color-1 u-text-hover-white u-btn-1">DODAJ<br>
+                            </a>
+                            <input type="submit" value="submit" class="u-form-control-hidden">
                         </div>
-                        <div class="u-form-send-message u-form-send-success"> Dziękujemy! Twoja wiadomość została
-                            wysłana!
-                        </div>
-                        <div class="u-form-send-error u-form-send-message"> Pomyślnie utworzono nowy ogród.
-                        </div>
+<!--                        <div class="u-form-send-message u-form-send-success"> Dziękujemy! Twoja wiadomość została-->
+<!--                            wysłana!-->
+<!--                        </div>-->
+<!--                        <div class="u-form-send-error u-form-send-message"> Przepraszamy, wiadomość nie mogła zostać-->
+<!--                            wysłana. Popraw błędy i spróbuj ponownie.-->
+<!--                        </div>-->
                         <input type="hidden" value="" name="recaptchaResponse">
                     </form>
                 </div>
-                <h2 class="u-custom-font u-font-lobster u-text u-text-body-alt-color u-text-2">OPIS:</h2>
-                <h2 class="u-custom-font u-font-lobster u-text u-text-body-alt-color u-text-3">NAZWA:</h2>
-                <h2 class="u-custom-font u-font-lobster u-text u-text-body-alt-color u-text-4">ADRES:</h2>
-                <h2 class="u-text u-text-5">WŁAŚCICIEL:</h2>
+                <h2 class="u-custom-font u-font-lobster u-text u-text-custom-color-1 u-text-2">OPIS:</h2>
+                <h2 class="u-custom-font u-font-lobster u-text u-text-custom-color-1 u-text-3">NAZWA:</h2>
+                <h2 class="u-custom-font u-font-lobster u-text u-text-custom-color-1 u-text-4">ADRES:</h2>
+                <h2 class="u-text u-text-custom-color-1 u-text-5">WŁAŚCICIEL:</h2>
             </div>
         </div>
     </div>
@@ -164,10 +166,7 @@
 
 
 <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-55c8">
-    <div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">:)<br>
-        </p>
-    </div>
+    <div class="u-align-left u-clearfix u-sheet u-sheet-1"></div>
 </footer>
 </body>
 </html>

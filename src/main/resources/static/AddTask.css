@@ -15,7 +15,6 @@
 .u-section-1 .u-text-1 {
   font-weight: 400;
   font-style: italic;
-  font-size: 1.875rem;
   margin: 26px auto 0;
 }
 
@@ -56,7 +55,7 @@
   font-style: italic;
   text-align: left;
   font-size: 1.5rem;
-  margin: 35px 750px 0 183px;
+  margin: 35px 750px 77px 183px;
 }
 
 @media (max-width: 1199px) {
@@ -70,6 +69,7 @@
 
   .u-section-1 .u-text-1 {
     margin-top: 1px;
+    font-size: 3rem;
   }
 
   .u-section-1 .u-form-1 {

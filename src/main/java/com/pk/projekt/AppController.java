@@ -24,6 +24,10 @@ public class AppController {
 
   @Autowired private TaskRepository taskRepo;
 
+  @Autowired private PlantRepository plantRepo;
+
+  @Autowired private NoteRepository noteRepo;
+
   @GetMapping("")
   public String viewHomePage(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -93,7 +97,7 @@ public class AppController {
 
   @RequestMapping("/plant")
   public String viewMyPlantsPage() {
-    return "MyPlants";
+    return "Plants";
   }
 
   @RequestMapping("/task")
@@ -102,7 +106,9 @@ public class AppController {
     User user = userRepo.findByEmail(email);
     List<Task> myTasks = taskRepo.findByUserIdGardenASC(user);
     model.addAttribute("myTasks", myTasks);
-    List<Task> tasks = taskRepo.findAll(Sort.by(Sort.Direction.ASC, "garden"));
+//    List<Task> tasks = taskRepo.findAll(Sort.by(Sort.Direction.ASC, "garden"));
+    List<Garden> gardens = gardenRepo.findByUserId(user);
+    List<Task> tasks = taskRepo.finByGardenListASC(gardens);
     for (int i = 0; i < tasks.size(); i++)
     {
       if (tasks.get(i).getUser().equals(user))
@@ -110,14 +116,15 @@ public class AppController {
         tasks.remove(i);
         i--;
       }
+
     }
     model.addAttribute("tasksInMyGardens", tasks);
-    return "Tasks";
+    return "tasks";
   }
 
   @RequestMapping("/employee")
   public String viewWorkersPage() {
-    return "Workers";
+    return "Notes";
   }
 
   @RequestMapping("/garden")
@@ -126,18 +133,56 @@ public class AppController {
     User user = userRepo.findByEmail(email);
     List<Garden> listGarden = gardenRepo.findByUserId(user);
     model.addAttribute("listGarden", listGarden);
+
+
+
     return "MyGardens";
   }
 
   @GetMapping("/addNote")
   public String viewAddNotePage(Model model) {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    List<Garden> gardens = gardenRepo.findByUserId(user);
+    model.addAttribute("gardens", gardens);
+
+
+
+
     return "AddNote";
   }
 
   @PostMapping("/addNote")
   public String processAddNote(@RequestParam("note") String description, @RequestParam("garden") Long gardenId, @RequestParam("worker") Long userId, @RequestParam("plant") Long plantId)
   {
-    return "";
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    Note note = new Note();
+    note.setDescription(description);
+    if (gardenId != 0)
+    {
+      note.setGarden(gardenRepo.findByGardenId(gardenId));
+    }
+    if (userId != 0)
+    {
+      note.setUser(userRepo.findByUserId(userId));
+    }
+    if (plantId != 0)
+    {
+      note.setPlant(plantRepo.findByPlantId(plantId));
+    }
+    note.setOwnerId(user.getId());
+
+    try {
+      noteRepo.save(note);
+    } catch (Exception e)
+    {
+
+    }
+
+
+
+    return "AddNote";
   }
 
 
@@ -145,7 +190,10 @@ public class AppController {
 
   @GetMapping("/addGarden")
   public String viewAddGardenPage(Model model) {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
     model.addAttribute("garden", new Garden());
+    model.addAttribute("owner", user);
     return "AddGarden";
   }
 
@@ -173,7 +221,11 @@ public class AppController {
     } catch (Exception e) {
 
     }
+
+    user = userRepo.findByUserId(5L);
+
     model.addAttribute("garden", new Garden());
+    model.addAttribute("owner", user);
     return "AddGarden";
   }
 
@@ -207,7 +259,9 @@ public class AppController {
     User user = userRepo.findByEmail(email);
     List<Task> myTasks = taskRepo.findByUserIdGardenASC(user);
     model.addAttribute("myTasks", myTasks);
-    List<Task> tasks = taskRepo.findAll(Sort.by(Sort.Direction.ASC, "garden"));
+//    List<Task> tasks = taskRepo.findAll(Sort.by(Sort.Direction.ASC, "garden"));
+    List<Garden> gardens = gardenRepo.findByUserId(user);
+    List<Task> tasks = taskRepo.finByGardenListASC(gardens);
     for (int i = 0; i < tasks.size(); i++)
     {
       if (tasks.get(i).getUser().equals(user))
@@ -215,9 +269,10 @@ public class AppController {
         tasks.remove(i);
         i--;
       }
+
     }
     model.addAttribute("tasksInMyGardens", tasks);
-    return "Tasks";
+    return "tasks";
   }
 
   @PostMapping("/addTask")
@@ -237,13 +292,13 @@ public class AppController {
     } catch (Exception e) {
 
     }
-//    model.addAttribute("task", new Task());
-//    String email = SecurityContextHolder.getContext().getAuthentication().getName();
-//    User user = userRepo.findByEmail(email);
-//    List<Garden> gardens = gardenRepo.findByUserId(user);
-//    model.addAttribute("listGarden", gardens);
-//    List<User> users = userRepo.findAll();
-//    model.addAttribute("listUser", users);
+    model.addAttribute("task", new Task());
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+    List<Garden> gardens = gardenRepo.findByUserId(user);
+    model.addAttribute("listGarden", gardens);
+    List<User> users = userRepo.findAll();
+    model.addAttribute("listUser", users);
     return "AddTask";
   }
 

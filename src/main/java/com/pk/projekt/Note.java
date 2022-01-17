@@ -14,6 +14,9 @@ public class Note {
   @Column(nullable = false, length = 256)
   private String description;
 
+  @Column(nullable = false)
+  private Long ownerId;
+
   @ManyToOne
   @JoinColumn(name = "gardenId")
   private Garden garden;
@@ -64,5 +67,13 @@ public class Note {
 
   public void setPlant(Plant plant) {
     this.plant = plant;
+  }
+
+  public Long getOwnerId() {
+    return ownerId;
+  }
+
+  public void setOwnerId(Long ownerId) {
+    this.ownerId = ownerId;
   }
 }
