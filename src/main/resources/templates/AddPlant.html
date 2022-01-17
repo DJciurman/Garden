@@ -34,7 +34,7 @@
         </h3>
         <h2 class="u-custom-font u-font-lobster u-text u-text-custom-color-1 u-text-default u-text-2"
             data-animation-name="" data-animation-duration="0" data-animation-delay="0" data-animation-direction="">
-            WITAJCIE, OGRODNICY</h2>
+            WITAJ [[${#request.userPrincipal.principal.fullName}]]</h2>
         <form id="logout" th:action="@{/logout}" method="post">
             <a onclick="document.getElementById('logout').submit();"
                class="u-border-2 u-border-white u-btn u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-1">
@@ -120,80 +120,78 @@
                 <h2 class="u-custom-font u-font-lobster u-text u-text-body-alt-color u-text-4">ROŚLINA:</h2>
                 <h2 class="u-custom-font u-font-lobster u-text u-text-body-alt-color u-text-5">OPIS:</h2>
                 <div class="u-form u-form-1">
-                    <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
-                          source="custom" name="form" style="padding: 10px;">
+                    <form th:action="@{/addPlantDatabase}" onload="this.reset()" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
+                          source="custom" name="form" style="padding: 10px;" th:object="${plant}">
                         <div class="u-form-group u-form-name">
                             <label for="name-1e14" class="u-form-control-hidden u-label"></label>
-                            <input type="text" id="name-1e14" name="PLANT"
-                                   class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+                            <input type="text" id="name-1e14" name="PLANT" th:field="*{name}"
+                                   class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required maxlength="40">
                         </div>
                         <div class="u-form-email u-form-group">
                             <label for="email-1e14" class="u-form-control-hidden u-label"></label>
-                            <input type="email" id="email-1e14" name="DESC"
-                                   class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+                            <input type="text" id="email-1e14" name="DESC" th:field="*{description}"
+                                   class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" maxlength="256">
                         </div>
                         <div class="u-align-left u-form-group u-form-submit">
-                            <a href="#"
-                               class="u-border-2 u-border-white u-btn u-btn-submit u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-1"
-                               data-animation-name="" data-animation-duration="0" data-animation-delay="0"
-                               data-animation-direction="">Prześlij</a>
+                            <a
+                                    class="u-border-2 u-border-white u-btn u-btn-submit u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-1">DODAJ
+                            </a>
                             <input type="submit" value="submit" class="u-form-control-hidden">
                         </div>
-                        <div class="u-form-send-message u-form-send-success"> Dziękujemy! Twoja wiadomość została
-                            wysłana!
-                        </div>
-                        <div class="u-form-send-error u-form-send-message"> Przepraszamy, wiadomość nie mogła zostać
-                            wysłana. Popraw błędy i spróbuj ponownie.
-                        </div>
+                        <!--                        <div class="u-form-send-message u-form-send-success"> Dziękujemy! Twoja wiadomość została-->
+                        <!--                            wysłana!-->
+                        <!--                        </div>-->
+                        <!--                        <div class="u-form-send-error u-form-send-message"> Przepraszamy, wiadomość nie mogła zostać-->
+                        <!--                            wysłana. Popraw błędy i spróbuj ponownie.-->
+                        <!--                        </div>-->
                         <input type="hidden" value="" name="recaptchaResponse">
                     </form>
                 </div>
                 <div class="u-form u-form-2">
-                    <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
+                    <form th:action="@{/addPlant}" onload="this.reset()" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form"
                           source="custom" name="form" style="padding: 10px;">
                         <div class="u-form-group u-form-select u-form-group-4">
                             <label for="select-0e8d" class="u-form-control-hidden u-label"></label>
                             <div class="u-form-select-wrapper">
-                                <select id="select-0e8d" name="select"
-                                        class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-                                    <option value="Item 1">Item 1</option>
-                                    <option value="Item 2">Item 2</option>
-                                    <option value="Item 3">Item 3</option>
+                                <select id="select-0e8d" th:name="plantId"
+                                        class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
+                                    <option selected th:value="0">Wybierz roślinę</option>
+                                    <option th:each="plant: ${listPlant}" th:text="${plant.name}" th:value="${plant.id}"></option>
                                 </select>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"
-                                     class="u-caret">
-                                    <path fill="currentColor" d="M4 8L0 4h8z"></path>
-                                </svg>
+                                <!--                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"-->
+                                <!--                                     class="u-caret">-->
+                                <!--                                    <path fill="currentColor" d="M4 8L0 4h8z"></path>-->
+                                <!--                                </svg>-->
                             </div>
                         </div>
                         <div class="u-form-group u-form-select u-form-group-5">
                             <label for="select-218b" class="u-form-control-hidden u-label"></label>
                             <div class="u-form-select-wrapper">
-                                <select id="select-218b" name="select-1"
-                                        class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
-                                    <option value="Item 1">Item 1</option>
-                                    <option value="Item 2">Item 2</option>
-                                    <option value="Item 3">Item 3</option>
+                                <select id="select-218b" th:name="gardenId"
+                                        class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
+                                    <option selected th:value="0">Wybierz ogród</option>
+                                    <option th:each="garden: ${listGarden}"
+                                            th:text="${garden.name} + ' : ' + ${garden.address}"
+                                            th:value="${garden.id}"></option>
                                 </select>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"
-                                     class="u-caret">
-                                    <path fill="currentColor" d="M4 8L0 4h8z"></path>
-                                </svg>
+                                <!--                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="12" version="1"-->
+                                <!--                                     class="u-caret">-->
+                                <!--                                    <path fill="currentColor" d="M4 8L0 4h8z"></path>-->
+                                <!--                                </svg>-->
                             </div>
                         </div>
                         <div class="u-align-left u-form-group u-form-submit">
-                            <a href="#"
-                               class="u-border-2 u-border-white u-btn u-btn-submit u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-2"
-                               data-animation-name="" data-animation-duration="0" data-animation-delay="0"
-                               data-animation-direction="">Prześlij</a>
+                            <a
+                                    class="u-border-2 u-border-white u-btn u-btn-submit u-button-style u-custom-font u-font-lobster u-hover-black u-none u-text-body-alt-color u-text-hover-white u-btn-2">DODAJ
+                            </a>
                             <input type="submit" value="submit" class="u-form-control-hidden">
                         </div>
-                        <div class="u-form-send-message u-form-send-success"> Dziękujemy! Twoja wiadomość została
-                            wysłana!
-                        </div>
-                        <div class="u-form-send-error u-form-send-message"> Przepraszamy, wiadomość nie mogła zostać
-                            wysłana. Popraw błędy i spróbuj ponownie.
-                        </div>
+                        <!--                        <div class="u-form-send-message u-form-send-success"> Dziękujemy! Twoja wiadomość została-->
+                        <!--                            wysłana!-->
+                        <!--                        </div>-->
+                        <!--                        <div class="u-form-send-error u-form-send-message"> Przepraszamy, wiadomość nie mogła zostać-->
+                        <!--                            wysłana. Popraw błędy i spróbuj ponownie.-->
+                        <!--                        </div>-->
                         <input type="hidden" value="" name="recaptchaResponse">
                     </form>
                 </div>
@@ -204,9 +202,11 @@
     </div>
 </section>
 
-
+<script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+</script>
 <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-55c8">
-    <div class="u-align-left u-clearfix u-sheet u-sheet-1"></div>
+    <div class="u-align-left u-clearfix u-sheet u-sheet-1"><a class="weatherwidget-io" href="https://forecast7.com/pl/50d0619d94/krakow/" data-label_1="KRAKÓW" data-label_2="WEATHER" data-theme="original" >KRAKÓW WEATHER</a></div>
 </footer>
 </body>
 </html>

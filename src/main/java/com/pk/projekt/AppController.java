@@ -310,6 +310,14 @@ public class AppController {
   @GetMapping("/addPlant")
   public String viewAddPlantPage(Model model) {
     model.addAttribute("plant", new Plant());
+
+    List<Plant> listPlant = plantRepo.findAllPlantsASC();
+    model.addAttribute("listPlant", listPlant);
+
+    List<Garden> listGarden = gardenRepo.findAllGardensASC();
+    model.addAttribute("listGarden", listGarden);
+
+
     return "AddPlant";
   }
 
@@ -385,6 +393,68 @@ public class AppController {
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     User user = userRepo.findByEmail(email);
     model.addAttribute("user", user);
+    return "ManageAccount";
+  }
+
+  @PostMapping("/addPlantDatabase")
+  public String processAddPlantDatabase(Plant plant, Model model) {
+
+    try {
+      plantRepo.save(plant);
+    } catch (Exception e) {
+
+    }
+
+    List<Plant> listPlant = plantRepo.findAllPlantsASC();
+    model.addAttribute("listPlant", listPlant);
+
+    List<Garden> listGarden = gardenRepo.findAllGardensASC();
+    model.addAttribute("listGarden", listGarden);
+
+
+    return "AddPlant";
+  }
+
+  @PostMapping("/addPlant")
+  public String processAddPlant(@RequestParam("plantId") Long plantId, @RequestParam("gardenId") Long gardenId, Model model) {
+
+    if (gardenId == 0 || plantId == 0) {
+
+    }
+    else {
+      Garden garden = gardenRepo.findByGardenId(gardenId);
+
+      Plant plant = plantRepo.findByPlantId(plantId);
+
+      garden.getPlant().add(plant);
+
+      try{
+        gardenRepo.save(garden);
+      } catch (Exception e) {
+
+      }
+    }
+
+    List<Plant> listPlant = plantRepo.findAllPlantsASC();
+    model.addAttribute("listPlant", listPlant);
+
+    List<Garden> listGarden = gardenRepo.findAllGardensASC();
+    model.addAttribute("listGarden", listGarden);
+
+    return "AddPlant";
+  }
+
+  @PostMapping("/manageData")
+  public String processManageData (User user, Model model) {
+
+    try {
+      userRepo.save(user);
+    } catch (Exception e) {
+
+    }
+
+    model.addAttribute("user", user);
+
     return "ManageAccount";
   }
 }
