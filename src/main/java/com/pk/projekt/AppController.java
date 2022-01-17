@@ -1,5 +1,6 @@
 package com.pk.projekt;
 
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -96,7 +97,40 @@ public class AppController {
   }
 
   @RequestMapping("/plant")
-  public String viewMyPlantsPage() {
+  public String viewMyPlantsPage(Model model) {
+
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+
+    List<Garden> gardens = gardenRepo.findByUserId(user);
+    model.addAttribute("gardens", gardens);
+    return "Plants";
+  }
+
+  @PostMapping("/deletePlant")
+  public String processDeletePlant (@RequestParam("plantAndGarden") String plantAndGarden, Model model)
+  {
+    String[] ids = plantAndGarden.split(":");
+    Long plantId = Long.valueOf(ids[0]);
+    Long gardenId = Long.valueOf(ids[1]);
+
+    Plant plant = plantRepo.findByPlantId(plantId);
+    Garden garden = gardenRepo.findByGardenId(gardenId);
+
+    garden.getPlant().remove(plant);
+
+    try {
+      gardenRepo.save(garden);
+    } catch (Exception e) {
+
+    }
+
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+
+    List<Garden> gardens = gardenRepo.findByUserId(user);
+    model.addAttribute("gardens", gardens);
+
     return "Plants";
   }
 
@@ -123,7 +157,13 @@ public class AppController {
   }
 
   @RequestMapping("/employee")
-  public String viewWorkersPage() {
+  public String viewWorkersPage(Model model) {
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+
+    List<Note> notes = noteRepo.findByOwner(user.getId());
+    model.addAttribute("notes", notes);
+
     return "Notes";
   }
 
@@ -134,7 +174,9 @@ public class AppController {
     List<Garden> listGarden = gardenRepo.findByUserId(user);
     model.addAttribute("listGarden", listGarden);
 
+    List<Garden> gardens = taskRepo.findNotInOwnGardensASC(listGarden, user);
 
+    model.addAttribute("gardens", gardens);
 
     return "MyGardens";
   }
@@ -143,17 +185,21 @@ public class AppController {
   public String viewAddNotePage(Model model) {
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     User user = userRepo.findByEmail(email);
-    List<Garden> gardens = gardenRepo.findByUserId(user);
-    model.addAttribute("gardens", gardens);
+    List<Garden> gardens = gardenRepo.findAllGardensASC();
+    model.addAttribute("listGarden", gardens);
 
+    List<User> users = userRepo.findAllUsersASC();
+    model.addAttribute("listUser", users);
 
+    List<Plant> plants = plantRepo.findAllPlantsASC();
+    model.addAttribute("listPlant", plants);
 
 
     return "AddNote";
   }
 
   @PostMapping("/addNote")
-  public String processAddNote(@RequestParam("note") String description, @RequestParam("garden") Long gardenId, @RequestParam("worker") Long userId, @RequestParam("plant") Long plantId)
+  public String processAddNote(@RequestParam("note") String description, @RequestParam("garden") Long gardenId, @RequestParam("worker") Long userId, @RequestParam("plant") Long plantId, Model model)
   {
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     User user = userRepo.findByEmail(email);
@@ -180,9 +226,37 @@ public class AppController {
 
     }
 
+    List<Garden> gardens = gardenRepo.findAllGardensASC();
+    model.addAttribute("listGarden", gardens);
 
+    List<User> users = userRepo.findAllUsersASC();
+    model.addAttribute("listUser", users);
+
+    List<Plant> plants = plantRepo.findAllPlantsASC();
+    model.addAttribute("listPlant", plants);
 
     return "AddNote";
+  }
+
+  @PostMapping("/deleteNote")
+  public String processDeleteNote(@RequestParam("noteId") Long noteId, Model model)
+  {
+    Note note = noteRepo.findByNoteId(noteId);
+
+    try{
+      noteRepo.delete(note);
+    } catch (Exception e) {
+
+    }
+
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+
+    List<Note> notes = noteRepo.findByOwner(user.getId());
+    model.addAttribute("notes", notes);
+
+
+    return "Notes";
   }
 
 
@@ -202,7 +276,11 @@ public class AppController {
   {
     Garden garden = gardenRepo.findByGardenId(gardenId);
 
-    gardenRepo.delete(garden);
+    try {
+      gardenRepo.delete(garden);
+    } catch (Exception e) {
+
+    }
 
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     User user = userRepo.findByEmail(email);

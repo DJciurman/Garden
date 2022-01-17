@@ -23,6 +23,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
   @Query("SELECT t FROM Task t WHERE t.garden in ?1 ORDER BY t.user.email ASC")
   List<Task> finByGardenListASC(List<Garden> gardens);
 
-
+  @Query("SELECT distinct t.garden FROM Task t WHERE t.garden not in ?1 AND t.user = ?2 ORDER BY t.garden ASC")
+  List<Garden> findNotInOwnGardensASC(List<Garden> gardens, User user);
 
 }

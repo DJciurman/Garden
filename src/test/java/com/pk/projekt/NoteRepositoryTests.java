@@ -34,13 +34,11 @@ public class NoteRepositoryTests {
   public void testCreateNote() {
     Note note = new Note();
     User user = repoUser.findByEmail("test@test.test");
-    Garden garden = repoGarden.findByGardenId(Long.valueOf(1));
-    Plant plant = repoPlant.findByPlantId(Long.valueOf(1));
+//    Garden garden = repoGarden.findByGardenId(Long.valueOf(1));
+//    Plant plant = repoPlant.findByPlantId(Long.valueOf(1));
 
-    note.setDescription("Podlej w końcu tego kaktusa");
-    note.setGarden(garden);
-    note.setPlant(plant);
-    note.setUser(user);
+    note.setDescription("Test notatki");
+    note.setOwnerId(user.getId());
 
     Note savedNote = repo.save(note);
 

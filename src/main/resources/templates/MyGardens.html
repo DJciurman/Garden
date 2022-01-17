@@ -144,13 +144,13 @@
                         <button type="submit" th:value="${garden.id}" th:name="gardenId" style="color: black">X</button>
                     </td>
                 </tr>
-                <tr style="height: 74px;">
-                    <td class="u-border-1 u-border-grey-30 u-palette-1-dark-1 u-table-cell u-table-cell-9">16</td>
-                    <td class="u-border-1 u-border-grey-30 u-palette-1-dark-1 u-table-cell u-table-cell-10">
-                        ASDasd
+                <tr th:each="garden: ${gardens}" style="height: 74px;">
+                    <td th:text="${garden.id}" class="u-border-1 u-border-grey-30 u-palette-1-dark-1 u-table-cell u-table-cell-9">ID</td>
+                    <td th:text="${garden.name}" class="u-border-1 u-border-grey-30 u-palette-1-dark-1 u-table-cell u-table-cell-10">
+                        NAZWA
                     </td>
-                    <td class="u-border-1 u-border-grey-30 u-palette-1-dark-1 u-table-cell u-table-cell-11">
-                        Warszawa 2
+                    <td th:text="${garden.address}" class="u-border-1 u-border-grey-30 u-palette-1-dark-1 u-table-cell u-table-cell-11">
+                        ADRES
                     </td>
                     <td class="u-border-1 u-border-grey-30 u-palette-1-dark-1 u-table-cell u-table-cell-12">
 

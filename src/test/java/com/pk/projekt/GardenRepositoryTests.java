@@ -48,14 +48,14 @@ public class GardenRepositoryTests {
 
   @Test
   public void testAddPlant() {
-    Garden garden = repo.findByGardenId(1L);
+    Garden garden = repo.findByGardenId(3L);
 
-    Plant plant1 = repoPlant.findByPlantId(4L);
-//    Plant plant2 = repoPlant.findByPlantId(Long.valueOf(2));
-//    Plant plant3 = repoPlant.findByPlantId(Long.valueOf(3));
+//    Plant plant1 = repoPlant.findByPlantId(4L);
+    Plant plant2 = repoPlant.findByPlantId(Long.valueOf(2L));
+    Plant plant3 = repoPlant.findByPlantId(Long.valueOf(3L));
 
-//    garden.getPlant().addAll(Arrays.asList(plant1, plant2, plant3));
-    garden.getPlant().add(plant1);
+    garden.getPlant().addAll(Arrays.asList(plant2, plant3));
+//    garden.getPlant().add(plant1);
 
     repo.save(garden);
   }

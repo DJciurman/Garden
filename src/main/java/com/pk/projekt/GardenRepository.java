@@ -13,4 +13,7 @@ public interface GardenRepository extends JpaRepository<Garden, Long> {
 
   @Query("SELECT g FROM Garden g WHERE g.id = ?1")
   Garden findByGardenId(Long id);
+
+  @Query("SELECT g FROM Garden g ORDER BY g.name ASC")
+  List<Garden> findAllGardensASC();
 }
