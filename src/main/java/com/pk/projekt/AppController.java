@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.awt.*;
 import java.util.List;
 
 @Controller
@@ -445,7 +446,14 @@ public class AppController {
   }
 
   @PostMapping("/manageData")
-  public String processManageData (User user, Model model) {
+  public String processManageData (@RequestParam("email") String newEmail, @RequestParam("firstName") String newFirstName, @RequestParam("lastName") String newLastName, Model model) {
+
+    String email = SecurityContextHolder.getContext().getAuthentication().getName();
+    User user = userRepo.findByEmail(email);
+
+    user.setEmail(newEmail);
+    user.setFirstName(newFirstName);
+    user.setLastName(newLastName);
 
     try {
       userRepo.save(user);

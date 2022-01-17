@@ -153,17 +153,17 @@
                           source="custom" name="form" style="padding: 10px;" th:object="${user}">
                         <div class="u-form-group u-form-name">
 <!--                            <label for="name-8e07" class="u-form-control-hidden u-label"></label>-->
-                            <input type="email" id="name-8e07" name="e-mail" th:field="*{email}" th:text="${user.email}" required
+                            <input type="email" id="name-8e07" th:name="email" th:field="*{email}" required
                                    class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                         </div>
                         <div class="u-form-group u-form-group-2">
 <!--                            <label for="text-6186" class="u-form-control-hidden u-label"></label>-->
-                            <input type="text" id="text-6186" name="name-1" th:field="*{firstName}" th:text="${user.firstName}"
+                            <input type="text" id="text-6186" th:name="firstName" th:field="*{firstName}"
                                    class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                         </div>
                         <div class="u-form-group u-form-group-3">
 <!--                            <label for="text-f3b3" class="u-form-control-hidden u-label"></label>-->
-                            <input type="text" id="text-f3b3" name="subname" th:field="*{lastName}" th:text="${user.lastName}"
+                            <input type="text" id="text-f3b3" th:name="lastName" th:field="*{lastName}"
                                    class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
                         </div>
                         <div class="u-align-center u-form-group u-form-submit">
